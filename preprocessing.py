@@ -15,7 +15,7 @@ def remove_year(vText):
     Returns:
       without year String.
     """
-    return re.sub(r"(\d{4})", "", vText) #maybe reduction
+    return re.sub(r"\(\d{4}\)", "", vText) #maybe reduction
 def remove_citation(vText):
     """ Remove Text with citation. [3], [10-12], [3, 4, 6], (1),  extra remove:(22%, n = 8/37)
     Args:
