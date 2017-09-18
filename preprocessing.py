@@ -53,7 +53,7 @@ def remove_stopwords(vText):
         clear string
     """
     stopwords_list = stopwords.words('english')
-    pattern = re.compile(r'\b(' + r'|'.join(stopwords_list) + r')\b\s+')
+    pattern = re.compile(r'\b(' + r'|'.join(stopwords_list) + r')\b')
     vText = pattern.sub("", vText)
     return vText
 
