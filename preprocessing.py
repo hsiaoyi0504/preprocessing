@@ -53,8 +53,8 @@ def remove_stopwords(vText):
         clear string
     """
     stopwords_list = stopwords.words('english')
-    pattern = '|'.join(stopwords_list)
-    vText = re.sub(pattern, "", vText)
+    pattern = re.compile(r'\b(' + r'|'.join(stopwords_list) + r')\b')
+    vText = pattern.sub("", vText)
     return vText
 
 varalias = json.load(open("one2many.json"))
@@ -63,6 +63,7 @@ train_text = pd.read_csv("input/training_text", sep="\|\|", engine="python", ski
 test_text = pd.read_csv("input/test_text", sep="\|\|", engine="python", skiprows=1, names=["ID", "Text"])
 train = pd.read_csv('input/training_variants')
 test = pd.read_csv('input/test_variants')
+
 
 def preprocessing(text, gene, var):
     """ replace many amino to 1 amino.
