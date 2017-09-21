@@ -7,7 +7,6 @@ import json
 def is_ascii(s):
     return all(ord(c) < 128 for c in s)
 
-
 def remove_year(vText):
     """ Remove Text with years like: (1999)
     Args:
@@ -25,8 +24,7 @@ def remove_citation(vText):
     Returns:
       without citation String.
     """
-    vText = re.sub(r"\([^\)]*,[^\)]*\)", "",
-                   vText)  # (DMN; Raichle et al., 2001;)
+    #vText = re.sub(r"\([^\)]*,[^\)]*\)", "", vText)  # (DMN; Raichle et al., 2001;)#TODO
     vText = re.sub(r"\[\d\{1,2}\]", "", vText)  # [1]
     vText = re.sub(r"\[\d{1,2}\s*-\s*\d{1,2}\]", "", vText)  # [10-12]
     vText = re.sub(r"\[[0-9]+(\ *,\ *[0-9]+\ *)*\]", "", vText)  # [1,3,4]
@@ -82,7 +80,7 @@ def preprocessing(text, gene, var):
     # re format: "^([A-Za-z])(\d+)([A-Za-z\*])", including *
     if var.type == "point":
         if var.end_amino == "*":
-            alias_list = [] + ["%s%s\S*" %
+            alias_list = [] + ["%s%sX" %
                                (start_m, var.pos) for start_m in [var.start_amino] + varalias[var.start_amino.upper()]]
         elif var.end_amino == "":
             alias_list = ["%s%s" % (start_m, var.pos)
