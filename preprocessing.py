@@ -6,7 +6,12 @@ import json
 import nltk
 
 from nltk.corpus import stopwords
+from nltk.tokenize import StanfordTokenizer
+
 from variation import Variation
+
+def is_ascii(s):
+    return all(ord(c) < 128 for c in s)
 
 def remove_year(vText):
     """ Remove Text with years like: (1999)
@@ -42,7 +47,7 @@ def remove_http(vText):
     vText = re.sub(r'(https|http)?:\/\/(\w|\.|\/|\?|\=|\&|\%)*\b', '', vText, flags=re.MULTILINE) #remove url
     vText = re.sub(r"(e-?)?mail: ([\w+-]+[\w.+-]*@[a-zA-Z0-9-]+\.[a-zA-Z0-9-]+)", '', vText, flags=re.IGNORECASE) #remove email
     vText = re.sub(r"([\w+-]+[\w.+-]*@[a-zA-Z0-9-]+\.[a-zA-Z0-9-]+)", '', vText, flags=re.MULTILINE) #remove e-mail
-    vText = re.sub(r"[\(](supplementary|fig)\.?.*[\)]\.?", "" , vText,flags=re.IGNORECASE) #remove (fig) or (supplementary)
+    #vText = re.sub(r"[\(](supplementary|fig)\.?.*[\)]\.?", "" , vText,flags=re.IGNORECASE) #remove (fig) or (supplementary)
     return vText
 
 def remove_stopwords(vText):
